@@ -3,7 +3,6 @@ parameter BW=8;
 module pu(
     input clk,
     input  rst_n,
-    //input start;
   input reg [BW-1:0] x_i,
   input reg [BW-1:0] y_i,
   output reg [BW-1:0] x_o,
