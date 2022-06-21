@@ -17,51 +17,37 @@ module testbench;
     clk = 0;
     forever #5 clk = ~clk;
   end
-  //assign rst_n=0;
  SMM smm (.clk(clk),.rst_n(rst_n),.A(A),.B(B),.Y(Y));
 
   
-task get_inputs;
-
-  for( i=0;i<3;i++) begin
-  for( j=0;j<3;j++) begin
-    A[i][j]=i+j;
+task get_inputs();
+int fp2;
+int p2;
+  fp2=$fopen("./inputs_A.txt","r");
+  for(int i=0;i<3;i++) begin
+  for(int j=0;j<3;j++) begin
+    p2=$fscanf(fp2,"%d\t",A[i][j]);
   end
   end
+  $fclose(fp2);
   
-  for( i=0;i<3;i++) begin
-  for( j=0;j<3;j++) begin
-    B[i][j]=i+j;
+  fp2=$fopen("./inputs_B.txt","r");
+  for(int i=0;i<3;i++) begin
+  for(int j=0;j<3;j++) begin
+    p2=$fscanf(fp2,"%d\t",B[i][j]);
   end
   end
+  $fclose(fp2);
   
-      for( i=0;i<3;i++) begin
-  for( j=0;j<3;j++) begin
-    $display("A Matrix %d %d %d",i,j,A[i][j]);
-  end
-    end
-  
-    for( i=0;i<3;i++) begin
-  for( j=0;j<3;j++) begin
-    $display("B Matrix %d %d %d",i,j,B[i][j]);
-  end
-    end
-endtask
-  
-       /*for( i=0;i<3;i++)
-          begin
-             for( j=0;j<3;j++)
-                 begin
-                    $display(" %d",Y[i][j]);
-                 end*/
+endtask 
   
   initial 
     begin
     get_inputs;
     rst_n=0;
-    #10
+    #2
     rst_n=1;
-    #80
+    #16
        for( i=0;i<3;i++)
           begin
              for( j=0;j<3;j++)
