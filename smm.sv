@@ -1,6 +1,5 @@
-// Code your design here
+
 `include "pu.sv"
-//parameter BW=8;
 module SMM (
   input clk,
   input reg rst_n,
@@ -28,9 +27,6 @@ module SMM (
   
   always@(posedge clk)
     begin
-      //$display("Hello %d",rst_n);
-      //$display("%d",counter);
-      //$display("%d",Y[0][2]);
       case(counter)
          'd0: begin a0<=0; b0<=0; a1<=0; b1<=0; a2<=0; b2<=0; end
          'd1: begin a0<=A[0][0]; b0<=B[0][0]; end
